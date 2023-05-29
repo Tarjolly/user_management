@@ -11,11 +11,11 @@ app.secret_key = "any-random-string-reshrdjtfkygluvchfjkhlbh"
 def create_connection():
     return pymysql.connect(
         host="10.0.0.17",
-        user="mmc",
+        user="tarjolly",
         # host="localhost",
         # user="root",
-        password="********",
-        db="mmc_test",
+        password="ACORN,
+        db="tarjolly_test",
         charset="utf8mb4",
         cursorclass=pymysql.cursors.DictCursor
     )
@@ -148,6 +148,18 @@ def view():
             cursor.execute(sql, values)
             result = cursor.fetchone()
     return render_template("view.html", result=result)
+
+
+@app.route("/post")
+def post():
+    with create_connection() as connection:
+            sql = "SELECT * FROM posts WHERE id = %s"
+            values = (request.args["id"])
+            cursor.execute(sql, values)
+            result = cursor.fetchone()
+    return "Here is the post: " + result["content"]
+
+
 
 # /update?id=1
 @app.route("/update", methods=["GET", "POST"])
