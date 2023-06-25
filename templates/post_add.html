@@ -4,8 +4,9 @@
 
 <form method="post">
     <Label>Post content</Label>
-    <textarea name="content"></textarea>
+    <textarea name="content" id="editor"></textarea>
     <button>Submit</button>
 </form>
-
+<script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+<script>ClassicEditor.create(document.querySelector('#editor'));</script>
 {% endblock %}

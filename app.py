@@ -154,7 +154,8 @@ def view():
 def post():
     with create_connection() as connection:
         with connection.cursor() as cursor:
-            sql = "SELECT * FROM posts WHERE id = %s"
+            sql = """SELECT * FROM posts LEFT JOIN users ON posts.userid = users.id
+            WHERE posts.id = %s"""
             values = (request.args["id"])
             cursor.execute(sql, values)
             result = cursor.fetchone()
@@ -285,3 +286,7 @@ def admin_only():
 
 
 app.run(debug=True)
+
+
+# This is the code for running the command for searching for users.id to find there infomation
+# SELECT * FROM posts JOIN users ON posts.user_id = users.id;
